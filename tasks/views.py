@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 
+from tasks.forms import TaskForm
+
 
 # Create your views here.
 def signup(request: HttpRequest) -> HttpResponse:
@@ -73,3 +75,9 @@ def signin(request: HttpRequest) -> HttpResponse:
             return redirect('home')
 
     return render(request, "signin.html", {"form": AuthenticationForm})
+
+
+def create_task(request:HttpRequest) -> HttpResponse:
+    return render(request, 'create_tasks.html', {
+        'form': TaskForm
+    })
