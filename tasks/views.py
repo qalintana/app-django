@@ -5,6 +5,7 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 
 from tasks.forms import TaskForm
+from tasks.models import Tasks
 
 
 # Create your views here.
@@ -33,8 +34,7 @@ def signup(request: HttpRequest) -> HttpResponse:
             return render(
                 request,
                 "signup.html",
-                context={"form": UserCreationForm,
-                         "error": "Password do not match"},
+                context={"form": UserCreationForm, "error": "Password do not match"},
             )
 
     return render(request, "signup.html", context={"form": UserCreationForm})
@@ -57,7 +57,7 @@ def signin(request: HttpRequest) -> HttpResponse:
 
     if request.method == "POST":
         user = authenticate(
-            request,
+            request=request,
             username=request.POST["username"],
             password=request.POST["password"],
         )
@@ -73,26 +73,31 @@ def signin(request: HttpRequest) -> HttpResponse:
             )
         else:
             login(request, user)
-            return redirect('home')
+            return redirect("home")
 
     return render(request, "signin.html", {"form": AuthenticationForm})
 
 
+def tasks(request: HttpRequest) -> HttpResponse:
+    tasks = Tasks.objects.filter(user=request.user, datecompleted__isnull=True)
+
+    return render(request, "tasks.html", {"tasks": tasks})
+
+
 def create_task(request: HttpRequest) -> HttpResponse:
 
-    if request.method == 'POST':
+    if request.method == "POST":
         try:
             form = TaskForm(request.POST)
             new_task = form.save(commit=False)
             new_task.user = request.user
             new_task.save()
-            return redirect('tasks')
+            return redirect("tasks")
         except:
-            return render(request, 'create_tasks.html', {
-                'form': TaskForm,
-                'error': 'Please, provide valid values'
-            })
+            return render(
+                request,
+                "create_tasks.html",
+                {"form": TaskForm, "error": "Please, provide valid values"},
+            )
 
-    return render(request, 'create_tasks.html', {
-        'form': TaskForm
-    })
+    return render(request, "create_tasks.html", {"form": TaskForm})
