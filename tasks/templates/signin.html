@@ -1,15 +1,24 @@
-{% extends "base.html" %}
-
+{% extends 'base.html' %}
 
 {% block content %}
+  {{ error }}
 
-{{ error }}
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <form method="POST">
+        {% csrf_token %}
+        <h1 class="text-center">signin</h1>
+        <div class="mb-3">
+          <label for="username">Username</label>
+          <input type="text" name="username" class="form-control" placeholder="Username" />
+        </div>
 
-<h1>signin</h1>
-
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-</form>
-{% endblock content %}
+        <div class="mb-3">
+          <label for="password2">Password</label>
+          <input type="password" name="password" class="form-control" placeholder="Password" />
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}
