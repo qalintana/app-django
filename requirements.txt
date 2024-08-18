@@ -6,10 +6,13 @@ cssbeautifier==1.15.1
 dj-database-url==2.2.0
 Django==5.1
 EditorConfig==0.12.4
+gunicorn==23.0.0
+h11==0.14.0
 html-tag-names==0.1.2
 html-void-elements==0.1.0
 jsbeautifier==1.15.1
 json5==0.9.25
+packaging==24.1
 pathspec==0.12.1
 psycopg2==2.9.9
 psycopg2-binary==2.9.9
@@ -20,4 +23,5 @@ sqlparse==0.5.1
 tqdm==4.66.5
 typing_extensions==4.12.2
 tzdata==2024.1
+uvicorn==0.30.6
 whitenoise==6.7.0
