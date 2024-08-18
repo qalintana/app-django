@@ -3,25 +3,25 @@
 {% block content %}
   <div class="row">
     <div class="offset-md-2 col-md-8">
-    <h1 class="text-center">Task detail</h1>
+    <h1 class="text-center">Detalhes da Tarefa</h1>
 
     <h2>{{ task.title }}</h2>
   
         <form method="post">
           {% csrf_token %}
           {{ form.as_p }}
-          <button class="btn btn-primary">save</button>
+          <button class="btn btn-primary">Salvar</button>
         </form>
 
         <div class="d-flex justify-content-between mt-2">
             <form action="{% url 'complete_task' task.id %}" method="POST">
                 {% csrf_token %}
-                <button class="btn btn-success">complete</button>
+                <button class="btn btn-success">Marcar Completa</button>
               </form>
       
               <form action="{% url 'delete_task' task.id %}" method="POST">
                 {% csrf_token %}
-                <button class="btn btn-danger">delete</button>
+                <button class="btn btn-danger">Eliminar</button>
               </form>
         </div>
      
