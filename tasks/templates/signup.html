@@ -6,11 +6,24 @@
   <section class="row">
     <div class="col-md-4 offset-md-4">
       <form method="POST" class="card card-body">
-        {% csrf_token %}
+        {% csrf_token %} 
         <h1 class="text-center">Signup</h1>
 
-        {{ form.as_p }}
+        <div class="mb-3">
+          <label for="username"></label>
+          <input type="text" name="username" class="form-control" placeholder="Write your user name">
+        </div>
 
+        <div class="mb-3">
+          <label for="password2">Password</label>
+          <input type="password" name="password1" class="form-control" placeholder="Write password">
+        </div>
+
+        <div class="mb-3">
+          <label for="password2">Confirm Password</label>
+          <input type="password" name="password2" class="form-control" placeholder="Confirme password">
+        </div>       
+      
         <button class="btn btn-primary">signup</button>
       </form>
     </div>
